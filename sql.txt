@@ -1,5 +1,5 @@
  CREATE DATABASE ESTORE;
- 
+ --hi this is yash
  USE ESTORE;
  
  CREATE TABLE EPRODUCTS (
