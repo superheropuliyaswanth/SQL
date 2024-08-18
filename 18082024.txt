@@ -1,0 +1,40 @@
+ CREATE DATABASE ESTORE;
+ 
+ USE ESTORE;
+ 
+ CREATE TABLE EPRODUCTS (
+    ProductID INT AUTO_INCREMENT PRIMARY KEY,
+    ProductName VARCHAR(100) NOT NULL,
+    Category VARCHAR(50),
+    Price DECIMAL(10, 2),
+    StockQuantity INT
+);
+
+INSERT INTO EPRODUCTS (ProductName, Category, Price, StockQuantity,discount)
+  VALUES ('Smartphone', 'Electronics', 299.99, 50,25);
+  
+  
+INSERT INTO EPRODUCTS (ProductName, Category, Price, StockQuantity,discount) 
+ VALUES ('TV', 'Electronics', 30299.99, 5,20);
+ 
+ INSERT INTO EPRODUCTS (ProductName, Category, Price, StockQuantity,discount) 
+VALUES 
+    ('Nokia 3210', 'Electronics', 299.99, 50,10),
+    ('HP Laptop', 'Electronics', 899.99, 30,25),
+    ('Phillps Coffee Maker', 'Home Appliances', 49.99, 100,20),
+    ('Sony Headphones', 'Electronics', 89.99, 75,20),
+    ('Bajaj Blender', 'Home Appliances', 29.99, 60,29);
+SELECT * FROM eproducts;
+truncate table eproducts;
+delete from eproducts;
+
+alter table eproducts add column discount int;
+alter table eproducts rename column bonus to discount;
+
+select * from eproducts limit 3;
+select sum(stockquantity) from eproducts;
+select  max(stockquantity) from eproducts;
+
+SELECT Category, COUNT(*)  FROM EPRODUCTS GROUP BY Category;
+select * from eproducts where discount in (select MAX(Discount) from estore.eproducts GROUP BY Category) order by category;
+select * from eproducts;
