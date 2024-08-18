@@ -1,0 +1,10 @@
+insert into eproducts(productName, category,price,stockQuantity) values ('smartphone','electronics',299.99,50);
+insert into eproducts(productName, category,price,stockQuantity) values ('TV','electronics',30299.99,5);
+    
+INSERT INTO EPRODUCTS (ProductName, Category, Price, StockQuantity) 
+VALUES 
+    ('Nokia 3210', 'Electronics', 299.99, 50),
+    ('HP Laptop', 'Electronics', 899.99, 30),
+    ('Phillps Coffee Maker', 'Home Appliances', 49.99, 100),
+    ('Sony Headphones', 'Electronics', 89.99, 75),
+    ('Bajaj Blender', 'Home Appliances', 29.99, 60);
