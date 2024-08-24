@@ -1,0 +1,37 @@
+show databases;
+use estore;
+select * from eproducts;
+
+--unique
+---------------------------------------------------------------------------------------------------------
+select count(price),category from eproducts group by category having max(price)>50;
+CREATE TABLE ORDERS (OID VARCHAR(10) UNIQUE, AMOUNT DECIMAL(10,2), PROD_ID INT, CUST_PHONE BIGINT);
+INSERT INTO ORDERS VALUES(1,200.5,2,9090909011);
+INSERT INTO ORDERS VALUES(2,500,2,9090909012);
+INSERT INTO ORDERS VALUES(3,2.456,2,9090909012);
+select * from orders;
+----------------------------------------------------------------------------------------------------------
+--composite key
+CREATE TABLE ORDERS1 (OID VARCHAR(10), AMOUNT DECIMAL(10,2), PROD_ID INT, CUST_PHONE BIGINT, constraint c unique(oid,prod_id));
+INSERT INTO ORDERS1 VALUES(1,200.5,2,9090909011);
+INSERT INTO ORDERS1 VALUES(1,500,3,9090909012);
+INSERT INTO ORDERS1 VALUES(2,2.456,2,9090909012);
+select * from orders1;
+-------------------------------------------------------------------------------------------------------------
+--primary key
+alter table orders add constraint pk1 primary key(oid,prod_id);
+desc orders;
+alter table orders drop constraint pk1;
+--------------------------------------------------------------------------------------------------------------
+--foreign key
+CREATE TABLE ORDERS2 (OID VARCHAR(10) UNIQUE, AMOUNT DECIMAL(10,2), PROD_ID INT, CUST_PHONE BIGINT, CUST_ID INT, ADDR VARCHAR(80),
+PRIMARY KEY ( PROD_ID, CUST_ID),
+FOREIGN KEY (PROD_ID) REFERENCES eproducts( ProductID) 
+);
+INSERT INTO ORDERS2 VALUES(1,200.5, 2,9090909011, 77,'BANGALORE');
+INSERT INTO ORDERS2 VALUES(2,500, 2,9090909012, 55,'DUBAI');
+
+
+INSERT INTO ORDERS2 VALUES(2,500, 25, 9090909012, 55,'amaravati');--error because prod id 25 is not there in eproducts prod id
+
+
