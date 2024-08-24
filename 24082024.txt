@@ -1,3 +1,4 @@
+--written by yash
 show databases;
 use estore;
 select * from eproducts;
