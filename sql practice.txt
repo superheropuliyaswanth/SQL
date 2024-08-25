@@ -1,0 +1,91 @@
+
+
+
+SQL Schema Setup
+1.1 Create Tables
+CREATE TABLE CUSTOMERS (
+    customer_id INT AUTO_INCREMENT PRIMARY KEY,
+    first_name VARCHAR(50),
+    last_name VARCHAR(50),
+    email VARCHAR(100),
+    UNIQUE(email)
+);
+
+CREATE TABLE PRODUCTS (
+    product_id INT AUTO_INCREMENT PRIMARY KEY,
+    product_name VARCHAR(100),
+    price DECIMAL(10, 2),
+    stock INT
+);
+
+CREATE TABLE ORDERS (
+    order_id INT AUTO_INCREMENT PRIMARY KEY,
+    order_date DATE,
+    customer_id INT,
+    product_id INT,
+    quantity INT,
+    FOREIGN KEY (customer_id) REFERENCES CUSTOMERS(customer_id),
+    FOREIGN KEY (product_id) REFERENCES PRODUCTS(product_id)
+);
+1.2 Insert Sample Data
+INSERT INTO CUSTOMERS (first_name, last_name, email) VALUES 
+('Jagga', Reddy', 'jagga.reddy@example.com'),
+('Jane', 'Smith', 'jane.smith@example.com'),
+('Alice', 'Johnson', 'alice.johnson@example.com'),
+('Megha', 'Reddy', megha.reddy@example.com');
+
+INSERT INTO PRODUCTS (product_name, price, stock) VALUES 
+('Laptop', 999.99, 50),
+('Smartphone', 499.99, 100),
+('Tablet', 299.99, 150),
+('Headphones', 199.99, 200);
+
+INSERT INTO ORDERS (order_date, customer_id, product_id, quantity) VALUES 
+('2024-08-01', 1, 1, 2),
+('2024-08-02', 2, 3, 1),
+('2024-08-02', 3, 2, 3),
+('2024-08-03', 1, 4, 1),
+('2024-08-04', 4, 1, 1);
+
+
+Practice Problems
+Problem Type
+Problem Statement
+SELECT Query
+1. Calculate the total sales revenue from all orders.
+SELECT Query
+2. Count the number of orders placed by each customer.
+SELECT Query
+3. Calculate the average quantity of products ordered.
+SELECT Query
+4. List customers who have placed more than one order.
+SELECT Query
+5. Group sales by product and display the total quantity ordered for each product.
+INSERT Query
+6. Insert a new customer named "Charlie Brown" with the email "charlie.brown@example.com".
+INSERT Query
+7. Insert a new order for the customer with customer_id = 2, ordering 2 units of the product with product_id = 3.
+UPDATE Query
+8. Update the stock of the product with product_id = 1 by decreasing it by 5.
+UPDATE Query
+9. Update the email of the customer with customer_id = 3 to "alice.new@example.com".
+UNIQUE Key
+10. Try to insert a customer with an email that already exists. Observe the behavior due to the UNIQUE constraint.
+COMPOSITE Key
+11. Modify the ORDERS table to add a composite key on customer_id and order_date.
+PRIMARY Key
+12. Create a new table SUPPLIERS with a primary key on supplier_id.
+INNER JOIN
+13. List all orders along with the customer names and product names.
+LEFT JOIN
+14. List all customers along with their orders, including those who haven't placed any orders.
+RIGHT JOIN
+15. List all products along with orders, including products that haven't been ordered.
+FULL OUTER JOIN
+16. Simulate a FULL OUTER JOIN to list all customers and products, including unmatched rows from both sides.
+SELF JOIN
+17. Find pairs of customers who share the same last name.
+
+
+
+SOLUTION: CHECK on 28th
