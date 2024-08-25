@@ -35,4 +35,18 @@ INSERT INTO ORDERS2 VALUES(2,500, 2,9090909012, 55,'DUBAI');
 
 INSERT INTO ORDERS2 VALUES(2,500, 25, 9090909012, 55,'amaravati');--error because prod id 25 is not there in eproducts prod id
 
+select * from eproducts;
+select * from orders2;
+select count(oid),prod_id from orders2 group by prod_id;
+INSERT INTO ORDERS2 VALUES(3,200.5, 1,9090909011, 77,'BANGALORE');
+INSERT INTO ORDERS2 VALUES(4,500, 4,9090909012, 55,'DUBAI');
+INSERT INTO ORDERS2 VALUES(5,200.5, 5,9090909011, 77,'BANGALORE');
+INSERT INTO ORDERS2 VALUES(6,500, 3,9090909012, 55,'DUBAI');
+
+SELECT eproducts.ProductName, orders2.ADDR  FROM eproducts left JOIN ORDERS2 ON eproducts.ProductID  = orders2.PROD_ID;
+SELECT count(eproducts.ProductName), orders2.ADDR  FROM eproducts INNER JOIN ORDERS2 ON eproducts.ProductID  = orders2.PROD_ID group by ORDERS2.addr;
+SELECT eproducts.ProductName, orders2.ADDR  FROM eproducts INNER JOIN ORDERS2 ON eproducts.ProductID  = orders2.PROD_ID;
+SELECT eproducts.ProductName, orders2.ADDR  FROM eproducts right JOIN ORDERS2 ON eproducts.ProductID  = orders2.PROD_ID;
+
+
 
