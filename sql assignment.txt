@@ -1,0 +1,134 @@
+show databases;
+create database Practice;
+use Practice;
+CREATE TABLE CUSTOMERS (
+    customer_id INT AUTO_INCREMENT PRIMARY KEY,
+    first_name VARCHAR(50),
+    last_name VARCHAR(50),
+    email VARCHAR(100),
+    UNIQUE(email)
+);
+
+CREATE TABLE PRODUCTS (
+    product_id INT AUTO_INCREMENT PRIMARY KEY,
+    product_name VARCHAR(100),
+    price DECIMAL(10, 2),
+    stock INT
+);
+
+CREATE TABLE ORDERS (
+    order_id INT AUTO_INCREMENT PRIMARY KEY,
+    order_date DATE,
+    customer_id INT,
+    product_id INT,
+    quantity INT,
+    FOREIGN KEY (customer_id) REFERENCES CUSTOMERS(customer_id),
+    FOREIGN KEY (product_id) REFERENCES PRODUCTS(product_id)
+);
+
+INSERT INTO CUSTOMERS (first_name, last_name, email) VALUES 
+('Jagga', 'Reddy', 'jagga.reddy@example.com'),
+('Jane', 'Smith', 'jane.smith@example.com'),
+('Alice', 'Johnson', 'alice.johnson@example.com'),
+('Megha', 'Reddy', 'megha.reddy@example.com');
+
+INSERT INTO PRODUCTS (product_name, price, stock) VALUES 
+('Laptop', 999.99, 50),
+('Smartphone', 499.99, 100),
+('Tablet', 299.99, 150),
+('Headphones', 199.99, 200);
+
+INSERT INTO ORDERS (order_date, customer_id, product_id, quantity) VALUES 
+('2024-08-01', 1, 1, 2),
+('2024-08-02', 2, 3, 1),
+('2024-08-02', 3, 2, 3),
+('2024-08-03', 1, 4, 1),
+('2024-08-04', 4, 1, 1);
+
+select * from customers;
+select * from products;
+select * from orders;
+--1)
+select sum(price * stock) from products;
+--2)
+select count(order_id),customer_id from orders group by(customer_id);
+--3)
+
+select Avg(quantity),customer_id from orders group by(customer_id);
+select Avg(quantity) from orders;
+--4)
+select count(order_id),customer_id from orders group by(customer_id) having count(order_id)>1;
+--5)
+
+select product_id,sum(quantity) from orders group by (product_id);
+
+--6)
+insert into customers values(5,"Charlie","Brown" ,"charlie.brown@example.com");
+--7)
+ new order for the customer with customer_id = 2, ordering 2 units of the product with product_id = 3.
+ 
+ insert into orders(order_date,customer_id,product_id,quantity) values('2024-08-01',2,3,2);
+ 
+ --8)
+ Update the stock of the product with product_id = 1 by decreasing it by 5.
+ 
+ update products set stock=stock-5 where product_id=1;
+ select * from products;
+ 
+ --9)
+ 9. Update the email of the customer with customer_id = 3 to "alice.new@example.com".
+ select * from customers;
+ update customers set email='alice.new@example.com' where customer_id=3;
+ 
+ --10)unique behaviour
+ insert into customers(first_name,last_name,email) values("bugga","reddy","jagga.reddy@example.com");
+ 
+ --11)
+ Modify the ORDERS table to add a composite key on customer_id and order_date.
+ 
+ alter table orders add constraint u1 unique(customer_id,order_date);
+ desc orders;
+
+--12)
+Create a new table SUPPLIERS with a primary key on supplier_id.
+
+create table suppliers(supp_id int primary key, product_id int, shop_id int); 
+
+desc suppliers;
+13. List all orders along with the customer names and product names.
+
+select * from orders;
+select * from products;
+select * from customers;
+ 
+select o.order_id,o.quantity,o.order_date,c.first_name,p.product_name from orders o inner join products p on o.product_id=p.product_id
+ join customers c on c.customer_id=o.customer_id order by order_id;
+ 
+ 
+ 14. List all customers along with their orders, including those who havent placed any orders.
+select * from orders;
+select * from products;
+select * from customers; 
+select * from customers c left join orders o on c.customer_id=o.customer_id;
+
+
+15. List all products along with orders, including products that havent been ordered.
+select * from orders;
+select * from products;
+select * from customers;
+insert into products values(5,"dvd player",31.11,60);
+select * from orders o right join products p on o.product_id=p.product_id;
+
+16. Simulate a FULL OUTER JOIN to list all customers and products, including unmatched rows from both sides.
+select * from orders;
+select * from products;
+select * from customers;
+select * from customers union select * from products;
+select o.order_id,o.quantity,o.order_date,c.first_name,p.product_name from orders o left join products p on o.product_id=p.product_id left join customers c on c.customer_id=o.customer_id order by order_id UNION ALL
+select o.order_id,o.quantity,o.order_date,c.first_name,p.product_name from orders o right join products p on o.product_id=p.product_id
+ right join customers c on c.customer_id=o.customer_id order by order_id;
+17. Find pairs of customers who share the same last name.
+select * from orders;
+select * from products;
+select * from customers;
+select a.first_name,a.last_name,b.first_name,b.last_name from customers a , customers b where  a.last_name=b.last_name;
