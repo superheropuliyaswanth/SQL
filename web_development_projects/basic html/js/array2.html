@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+
+</body>
+<script>
+
+    class Student{
+        constructor(name,age,height){
+            this.name=name;
+            this.age=age;
+            this.height=height;
+        }
+    };
+
+    let sa=[];
+    sa.push(new Student("abhi",21,5.6));
+    sa.push(new Student("Bobby",16,5.9));
+    sa.push(new Student("Cib",19,5.4));
+    sa.push(new Student("Dolly",43,4.6));
+    sa.push(new Student("Varun",22,6.6));
+    console.log("student "+sa.shift().name+" and student "+sa.shift().name+" are irregular so detained from college");
+    for(let i of sa){
+        if(i.age>21){
+            console.log(i.name+" "+i.age+" "+i.height);   
+        }
+        
+
+    }
+
+
+</script>
+</html>
