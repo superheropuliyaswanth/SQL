@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    class User{
+    constructor(name, age){
+        this.name=name,
+            this.age=age;
+    }
+
+}
+let u1=new User("Rohan",23)
+let u2=new User("Rohith",33)
+function logic(a,b){
+    
+    if(a.age>b.age){
+    return a.name+" is elder to "+b.name;
+}
+else {
+    return b.name+" is elder to "+a.name;
+}
+}
+
+function f1(b=6,a=5){
+    alert(a+" "+b);
+}
+f1(a=7,b=3);
+
+alert(logic(u1,u2));
+
+
+</script>
+</html>
